@@ -7,7 +7,7 @@ I decided to use four classes: Owner, Pet, Task, and Scheduler. The Owner class 
 
 For my UML diagram, I connected the classes based on how they would work in the app. One owner can have multiple pets, and each pet can have different tasks. I made the Scheduler its own class because I thought it would be easier to manage the scheduling part separately instead of putting everything into one class.
 
-** b. Design changes **
+**b. Design changes**
 After looking over my design, I realized it made more sense to have each pet keep track of its own tasks instead of having the Owner class handle everything. This way, if someone has more than one pet, their tasks won't all be mixed together.
 
 I also decided to keep the Scheduler separate because it will have to handle things like sorting tasks and checking for scheduling conflicts. I think this will make the code easier to work with when I start adding more features later.
