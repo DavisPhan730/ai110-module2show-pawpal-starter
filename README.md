@@ -104,7 +104,7 @@ tests/test_pawpal.py::test_task_completion PASSED
 tests/test_pawpal.py::test_task_addition PASSED
 tests/test_pawpal.py::test_multiple_pets PASSED
 
-3 passed
+3 passed in 0.01s
 ```
 
 ## 📐 Smarter Scheduling
