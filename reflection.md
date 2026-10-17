@@ -50,13 +50,15 @@ I also kept the sorting method simple by sorting the time strings in HH format. 
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I used pytest to test the main parts of my PawPal+ system. I checked that tasks can be added and marked as complete, that the scheduler can organize tasks by time, and that it can handle tasks from multiple pets.
+
+I also tested situations that might cause issues, like having a pet with no tasks or scheduling two tasks at the same time. Another thing I checked was whether the scheduler stays within the owner's available time. I tested daily and weekly recurring tasks to make sure the next task gets created for the correct date.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+I would rate my confidence in the system a 4 out of 5 if all my tests pass. I think the program handles the main features pretty well, and testing different situations helped me understand how the code works.
+
+One thing I would still improve is how scheduling conflicts are handled. Right now, the system can recognize when two tasks overlap, but it doesn't automatically rearrange them. I think adding that feature would make the app more useful, especially for owners with multiple pets.
 
 ---
 
