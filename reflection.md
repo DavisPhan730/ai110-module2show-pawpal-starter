@@ -1,16 +1,16 @@
 # PawPal+ Project Reflection
 
 ## 1. System Design
+The three main things I want users to be able to do are add their pets, make tasks for them, and see a daily schedule. For example, someone could add their dog, set up feeding and walking times, and see what they need to get done that day.
 
-**a. Initial design**
+I decided to use four classes: Owner, Pet, Task, and Scheduler. The Owner class keeps track of the owner's information and their pets. The Pet class holds information about each pet and the tasks they need to do. The Task class stores things like feeding, walks, and medication, along with how long each task takes and how important it is. The Scheduler class puts everything together and helps organize the tasks.
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+For my UML diagram, I connected the classes based on how they would work in the app. One owner can have multiple pets, and each pet can have different tasks. I made the Scheduler its own class because I thought it would be easier to manage the scheduling part separately instead of putting everything into one class.
 
 **b. Design changes**
+After looking over my design, I realized it made more sense to have each pet keep track of its own tasks instead of having the Owner class handle everything. This way, if someone has more than one pet, their tasks won't all be mixed together.
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+I also decided to keep the Scheduler separate because it will have to handle things like sorting tasks and checking for scheduling conflicts. I think this will make the code easier to work with when I start adding more features later.
 
 ---
 
