@@ -24,8 +24,11 @@ I also decided to keep the Scheduler separate because it will have to handle thi
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+For this phase, I worked on making the scheduling system smarter by adding sorting, filtering, recurring tasks, and conflict detection. I used AI to help figure out how to organize the methods and how to use Python's sorted function with lambda.
+
+One tradeoff I made was keeping the conflict detection pretty simple. The program checks whether task times overlap and gives a warning, but it doesn't automatically move the tasks around to fix the conflict. I decided to keep it this way because I wanted the code to be easier to understand and test. A more advanced scheduler could automatically reschedule tasks, but that would add more complexity.
+
+I also kept the sorting method simple by sorting the time strings in HH format. This works because the times are stored consistently in 24-hour format. I think this was a good choice for now since it gets the job done without adding unnecessary code.
 
 ---
 

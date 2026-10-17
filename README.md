@@ -109,16 +109,24 @@ tests/test_pawpal.py::test_multiple_pets PASSED
 
 ## 📐 Smarter Scheduling
 
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | sort_tasks() | Sorts tasks by priority and preferred time |
-| Filtering | generate_daily_plan() | Skips completed tasks and tasks that exceed the available time |
-| Conflict handling | find_conflicts() | Finds tasks that have overlapping times |
-| Recurring tasks | recurring_tasks_for_day() | Handles daily tasks and weekly tasks scheduled for Monday |
+For this phase, I added some new features to make the scheduling
+system more useful. The app can now sort tasks by time, filter
+tasks, handle repeating tasks, and find scheduling conflicts.
 
-The scheduler uses the Owner class to collect tasks from all pets. It then organizes the tasks based on priority and available time.
+| Feature | Method(s) | What it does |
+|---|---|---|
+| Sorting | sort_by_time() | Organizes tasks from earliest to latest |
+| Filtering | filter_tasks() | Filters by pet name or completion status |
+| Recurring tasks | mark_complete(), complete_task() | Creates the next daily or weekly task |
+| Conflict detection | find_conflicts() | Checks if task times overlap |
+| Daily planning | generate_daily_plan() | Creates a plan based on priority and available time |
 
-Right now, the scheduling system is pretty basic, but it works for organizing multiple pets' tasks. Some improvements I could make later are handling different days for weekly tasks and automatically adjusting tasks that overlap.
+I tested the features in main.py using two pets, Buddy and Luna.
+I added tasks out of order to check sorting and scheduled two
+tasks at overlapping times to check conflict detection.
+
+I also tested recurring tasks by completing a daily feeding
+task and checking that a new task was created for the next day.
 
 ## 📸 Demo Walkthrough
 
