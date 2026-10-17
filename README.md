@@ -22,6 +22,27 @@ Your final app should:
 - Display the plan clearly (and ideally explain the reasoning)
 - Include tests for the most important scheduling behaviors
 
+## Features
+
+PawPal+ is a pet care app that helps owners manage tasks for
+multiple pets and keep track of their daily routines.
+
+Some of the main features include:
+
+- Add multiple pets and their information.
+- Create feeding, walking, medication, and other care tasks.
+- Set a task's duration, priority, time, and recurrence.
+- Sort tasks from earliest to latest.
+- Filter tasks by pet or completion status.
+- Mark tasks as complete.
+- Automatically create the next daily or weekly task.
+- Detect tasks that overlap and display a warning.
+- Generate a daily schedule based on priority and available time.
+
+The app uses four Python classes: Owner, Pet, Task, and Scheduler.
+The Scheduler gets tasks from all of the owner's pets and
+organizes them into a daily plan.
+
 ## Getting Started
 
 ### Setup
@@ -180,10 +201,76 @@ task and checking that a new task was created for the next day.
 
 ## 📸 Demo Walkthrough
 
-1. Run `python main.py` in the terminal.
-2. The program creates an owner named Davis and two pets named Buddy and Luna.
-3. Each pet gets its own care tasks, including walks, feeding, and playtime.
-4. The Scheduler collects all the tasks and organizes them into a daily schedule.
-5. The program prints the schedule, showing the task times, priorities, and total time needed.
+For this project, I created a Streamlit app that lets pet owners
+add pets, schedule care tasks, and organize their daily routines.
 
-**Screenshot or video** *(optional)*:
+### How to Use the App
+
+1. Run the app using `python -m streamlit run app.py`.
+2. Enter the owner's name and available time for the day.
+3. Add a pet by entering its name and species.
+4. Add tasks for the pet, including the task name, duration,
+   priority, preferred time, and recurrence.
+5. Use the filters to view tasks for a specific pet or status.
+6. Mark a task as complete when it is finished.
+7. Check the Scheduling Conflicts section for overlapping tasks.
+8. Click Generate Schedule to see the daily plan.
+
+### Example Workflow
+
+For my example, I created two pets named Buddy and Luna.
+I added walking and feeding tasks and gave them different
+priorities and times.
+
+The Scheduler organizes tasks by priority while staying within
+the owner's available time. The app can then display the selected
+tasks in chronological order.
+
+If two tasks overlap, the app shows a warning so the owner knows
+there might be a scheduling problem.
+
+I also tested recurring tasks. When I complete a daily task,
+the system creates another task for the next day.
+
+### Sample CLI Output
+
+```text
+=== PawPal+ Smart Scheduling Demo ===
+Owner: Davis
+Pets: 2
+
+--- Tasks Sorted by Time ---
+08:00 - Feed Luna
+08:00 - Feed Buddy
+14:00 - Play with Luna
+18:00 - Evening Walk
+
+--- Buddy's Tasks ---
+Evening Walk
+Feed Buddy
+
+--- Scheduling Conflicts ---
+WARNING: Feed Luna overlaps with Feed Buddy!
+
+--- Recurring Task Test ---
+Original due date: 2026-10-17
+Completed: True
+Next due date: 2026-10-18
+
+--- Today's Schedule ---
+08:00 - Feed Luna (10 min)
+14:00 - Play with Luna (20 min)
+18:00 - Evening Walk (30 min)
+
+Total Tasks: 3
+Total Time: 60 minutes
+```
+
+### Testing
+
+I used pytest to check the most important parts of my system.
+My tests cover sorting, task completion, filtering, multiple
+pets, recurring tasks, time limits, and conflicts.
+
+The tests help me make sure changes to the program don't
+break features that were already working.

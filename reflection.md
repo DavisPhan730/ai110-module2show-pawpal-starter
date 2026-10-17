@@ -5,13 +5,15 @@ The three main things I want users to be able to do are add their pets, make tas
 
 **a. Initial design**
 
-For my UML diagram, I connected the classes based on how they would work in the app. One owner can have multiple pets, and each pet can have different tasks. I made the Scheduler its own class because I thought it would be easier to manage the scheduling part separately instead of putting everything into one class.
+When I first started PawPal+, I wanted users to be able to add pets, create care tasks, and generate a daily schedule. I decided to use four classes: Owner, Pet, Task, and Scheduler.
+
+The Owner class keeps track of the owner's information and pets. The Pet class stores information about each pet and its tasks. The Task class handles things like feeding, walks, and medications. The Scheduler class is responsible for organizing everything into a daily plan. I also created a UML diagram to show how the different classes connect.
 
 **b. Design changes**
 
-After looking over my design, I realized it made more sense to have each pet keep track of its own tasks instead of having the Owner class handle everything. This way, if someone has more than one pet, their tasks won't all be mixed together.
+As I worked on the project, I realized I needed more methods than I originally planned. I added a method to the Owner class to collect tasks from every pet because the scheduler needed to work with multiple pets.
 
-I also decided to keep the Scheduler separate because it will have to handle things like sorting tasks and checking for scheduling conflicts. I think this will make the code easier to work with when I start adding more features later.
+I also added methods for filtering tasks, sorting them by time, and creating recurring tasks. These changes made the system more useful without having to completely change my original design.
 
 ---
 
@@ -19,16 +21,15 @@ I also decided to keep the Scheduler separate because it will have to handle thi
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+My scheduler looks at task priority, available time, completion status, and due dates when creating a schedule. High-priority tasks are considered first because I wanted important activities like feeding and medication to be less likely to get skipped.
+
+I also made sure the scheduler doesn't add more tasks than the owner's available time allows. Once the tasks are selected, they can be displayed in order by time.
 
 **b. Tradeoffs**
 
-For this phase, I worked on making the scheduling system smarter by adding sorting, filtering, recurring tasks, and conflict detection. I used AI to help figure out how to organize the methods and how to use Python's sorted function with lambda.
+One tradeoff I made was keeping conflict detection simple. The scheduler can tell when two tasks overlap, but it doesn't automatically change their times.
 
-One tradeoff I made was keeping the conflict detection pretty simple. The program checks whether task times overlap and gives a warning, but it doesn't automatically move the tasks around to fix the conflict. I decided to keep it this way because I wanted the code to be easier to understand and test. A more advanced scheduler could automatically reschedule tasks, but that would add more complexity.
-
-I also kept the sorting method simple by sorting the time strings in HH format. This works because the times are stored consistently in 24-hour format. I think this was a good choice for now since it gets the job done without adding unnecessary code.
+I decided this was reasonable because I wanted to focus on getting the main features working first. Automatically moving tasks around would make the code more complicated, and I would need to consider the owner's preferences more carefully.
 
 ---
 
@@ -36,29 +37,39 @@ I also kept the sorting method simple by sorting the time strings in HH format. 
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used ChatGPT to help me throughout the project. It helped me plan my classes, create the UML diagram, write Python methods, and come up with tests.
+
+The most helpful part was being able to ask questions about specific problems while I worked in VS Code. I also used separate conversations for different phases, which made it easier to focus on one part of the project at a time.
+
+I found that asking AI for specific code changes and explanations was more helpful than just asking it to build the entire application at once.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+One design decision I focused on was keeping the scheduling logic separate from the pet and owner information. I didn't want everything to be handled by one large class because that would make the program harder to understand.
+
+I also kept conflict detection as a warning instead of trying to automatically rearrange tasks. I thought that would be easier to test and more realistic for the amount of time I had.
+
+I didn't just rely on the AI-generated code. I ran the program in the terminal, tested it in Streamlit, and used pytest to check whether the main features were working.
 
 ---
 
 ## 4. Testing and Verification
 
-**a. What you tested**
+**a. What I tested**
 
-I used pytest to test the main parts of my PawPal+ system. I checked that tasks can be added and marked as complete, that the scheduler can organize tasks by time, and that it can handle tasks from multiple pets.
+I tested adding tasks, completing tasks, sorting by time, filtering by pet and status, and scheduling tasks for multiple pets.
 
-I also tested situations that might cause issues, like having a pet with no tasks or scheduling two tasks at the same time. Another thing I checked was whether the scheduler stays within the owner's available time. I tested daily and weekly recurring tasks to make sure the next task gets created for the correct date.
+I also tested edge cases, like pets with no tasks, tasks scheduled at the same time, and owners who don't have enough time to complete everything.
+
+Another important thing I tested was recurrence. I made sure daily and weekly tasks created a new task with the correct next due date.
+
+All 12 of my Phase 5 automated tests passed.
 
 **b. Confidence**
 
-I would rate my confidence in the system a 4 out of 5 if all my tests pass. I think the program handles the main features pretty well, and testing different situations helped me understand how the code works.
+I would rate my confidence in my program a 4 out of 5. I think the main features work well because I tested them using both the terminal and automated tests.
 
-One thing I would still improve is how scheduling conflicts are handled. Right now, the system can recognize when two tasks overlap, but it doesn't automatically rearrange them. I think adding that feature would make the app more useful, especially for owners with multiple pets.
+There are still things I could improve, especially how the scheduler handles overlapping tasks. If I had more time, I would test larger schedules with more pets and different types of recurring tasks.
 
 ---
 
@@ -66,12 +77,18 @@ One thing I would still improve is how scheduling conflicts are handled. Right n
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+The part I'm most satisfied with is getting the Python classes and Streamlit app to work together. At first, I was mainly focused on understanding how the classes should connect, but by the end I had a working application that could manage pets and create schedules.
+
+I also liked seeing the tests pass because it showed that the code was doing what I expected.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+If I had more time, I would improve the way the app handles scheduling conflicts. Instead of only showing a warning, I would want it to suggest another available time.
+
+I would also add permanent data storage so owners wouldn't lose their pets and tasks when their Streamlit session ends.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+The biggest thing I learned was that building an app is easier when I break it into smaller parts instead of trying to do everything at once.
+
+Using AI helped me work faster, but I still had to make decisions about how the system should work, review the code, and test the results. I learned that being the lead architect means understanding the design and making sure everything works together instead of just accepting whatever code AI generates.
