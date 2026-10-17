@@ -3,7 +3,7 @@
 ## 1. System Design
 The three main things I want users to be able to do are add their pets, make tasks for them, and see a daily schedule. For example, someone could add their dog, set up feeding and walking times, and see what they need to get done that day.
 
-I decided to use four classes: Owner, Pet, Task, and Scheduler. The Owner class keeps track of the owner's information and their pets. The Pet class holds information about each pet and the tasks they need to do. The Task class stores things like feeding, walks, and medication, along with how long each task takes and how important it is. The Scheduler class puts everything together and helps organize the tasks.
+**a. Initial design**
 
 For my UML diagram, I connected the classes based on how they would work in the app. One owner can have multiple pets, and each pet can have different tasks. I made the Scheduler its own class because I thought it would be easier to manage the scheduling part separately instead of putting everything into one class.
 
