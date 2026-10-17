@@ -87,9 +87,20 @@ Total Time: 70 minutes
 
 ## 🧪 Testing PawPal+
 
-I added three tests to check the main features of my program.
+For this phase, I used pytest to make sure my PawPal+ system
+was working correctly. I tested the main features like adding
+tasks, marking tasks as complete, sorting tasks by time,
+and creating schedules for multiple pets.
 
-The first test checks that marking a task as complete changes its status. The second test checks that adding a task to a pet increases its task count. The third test checks that the scheduler can get tasks from multiple pets.
+I also added some extra tests to see how the program handles
+different situations. For example, I tested what happens when
+a pet has no tasks, when two tasks are scheduled at the same
+time, and when the owner doesn't have enough time to finish
+everything.
+
+I also checked that daily and weekly recurring tasks create
+a new task with the correct due date after being completed.
+
 
 To run the tests:
 
@@ -100,12 +111,51 @@ python -m pytest -v
 Expected results:
 
 ```text
-tests/test_pawpal.py::test_task_completion PASSED
-tests/test_pawpal.py::test_task_addition PASSED
-tests/test_pawpal.py::test_multiple_pets PASSED
+tests/test_pawpal.py::test_task_completion PASSED            [  8%]
+tests/test_pawpal.py::test_task_addition PASSED              [ 16%]
+tests/test_pawpal.py::test_multiple_pets PASSED              [ 25%]
+tests/test_pawpal.py::test_sort_by_time PASSED               [ 33%]
+tests/test_pawpal.py::test_filter_by_pet_and_status PASSED   [ 41%]
+tests/test_pawpal.py::test_recurring_task PASSED             [ 50%]
+tests/test_pawpal.py::test_conflict_detection PASSED         [ 58%]
+tests/test_pawpal.py::test_empty_pet_schedule PASSED         [ 66%]
+tests/test_pawpal.py::test_duplicate_task_times PASSED       [ 75%]
+tests/test_pawpal.py::test_available_time_limit PASSED       [ 83%]
+tests/test_pawpal.py::test_completed_tasks_not_scheduled PASSED [ 91%]
+tests/test_pawpal.py::test_weekly_recurrence PASSED          [100%]
 
-3 passed in 0.01s
+======================= 12 passed in 0.03s ========================
 ```
+### What I Tested
+
+- Adding tasks to a pet
+- Marking tasks as completed
+- Scheduling tasks from multiple pets
+- Sorting tasks by time
+- Filtering tasks by pet and completion status
+- Creating daily recurring tasks
+- Detecting overlapping tasks
+- Handling pets with no tasks
+- Detecting tasks scheduled at the exact same time
+- Staying within the owner's available time
+- Excluding completed tasks from the schedule
+- Creating weekly recurring tasks
+
+### Confidence Level
+
+★★★★☆ (4/5 stars)
+
+I would rate my confidence in the system a 4 out of 5
+if all 12 tests pass. I think the program works well
+for the main features, and the tests helped me check
+that everything was behaving the way I expected.
+
+There are still a few things I could improve. For
+example, the scheduler detects overlapping tasks,
+but it doesn't automatically change their times.
+I would also want to test more complicated schedules
+before saying the system is completely reliable.
+
 
 ## 📐 Smarter Scheduling
 

@@ -142,3 +142,95 @@ def test_conflict_detection():
     assert len(conflicts) == 1
     assert conflicts[0][0].title == "Walk Buddy"
     assert conflicts[0][1].title == "Feed Luna"
+
+# Test 8: Check a pet with no tasks
+def test_empty_pet_schedule():
+    owner = Owner("Davis")
+    dog = Pet("Buddy", "Dog")
+
+    owner.add_pet(dog)
+
+    scheduler = Scheduler()
+    plan = scheduler.generate_daily_plan(owner)
+
+    assert plan == []
+
+
+# Test 9: Check tasks scheduled at the same time
+def test_duplicate_task_times():
+    scheduler = Scheduler()
+
+    tasks = [
+        Task("Feed Buddy", 15, preferred_time="08:00"),
+        Task("Feed Luna", 10, preferred_time="08:00")
+    ]
+
+    conflicts = scheduler.find_conflicts(tasks)
+
+    assert len(conflicts) == 1
+    assert conflicts[0][0].title == "Feed Buddy"
+    assert conflicts[0][1].title == "Feed Luna"
+
+
+# Test 10: Check owner's available time limit
+def test_available_time_limit():
+    owner = Owner("Davis", available_minutes=30)
+    dog = Pet("Buddy", "Dog")
+
+    dog.add_task(Task("Morning Walk", 20, "high"))
+    dog.add_task(Task("Grooming", 25, "low"))
+
+    owner.add_pet(dog)
+
+    scheduler = Scheduler()
+    plan = scheduler.generate_daily_plan(owner)
+
+    total_time = sum(
+        task.duration_minutes for task in plan
+    )
+
+    assert total_time <= 30
+    assert len(plan) == 1
+    assert plan[0].title == "Morning Walk"
+
+
+# Test 11: Check completed tasks are not scheduled
+def test_completed_tasks_not_scheduled():
+    owner = Owner("Davis")
+    cat = Pet("Luna", "Cat")
+
+    task = Task("Feed Luna", 10)
+    cat.add_task(task)
+    task.mark_complete()
+
+    owner.add_pet(cat)
+
+    scheduler = Scheduler()
+    plan = scheduler.generate_daily_plan(owner)
+
+    assert len(plan) == 0
+
+
+# Test 12: Check weekly recurring tasks
+def test_weekly_recurrence():
+    dog = Pet("Buddy", "Dog")
+
+    today = date.today()
+
+    task = Task(
+        "Weekly Grooming",
+        30,
+        recurrence="weekly",
+        due_date=today
+    )
+
+    dog.add_task(task)
+    dog.complete_task(task)
+
+    assert task.completed is True
+    assert len(dog.tasks) == 2
+
+    next_task = dog.tasks[1]
+
+    assert next_task.completed is False
+    assert next_task.due_date == today + timedelta(days=7)
